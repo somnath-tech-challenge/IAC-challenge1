@@ -16,6 +16,9 @@ locals {
   user_data_app = <<-EOT
 #!/bin/bash
 yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
 sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 sudo systemctl start amazon-ssm-agent
   EOT

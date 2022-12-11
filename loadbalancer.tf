@@ -25,6 +25,16 @@ resource "aws_lb_target_group" "web_tier" {
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.mainvpc.id
+  target_type = "instance"
+
+  health_check {    
+    healthy_threshold   = 3    
+    unhealthy_threshold = 10    
+    timeout             = 5    
+    interval            = 10    
+    path                = "/"    
+    port                = 80  
+  }
 }
 
 ##### App tier Load Balancer #####
