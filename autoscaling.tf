@@ -11,7 +11,9 @@ resource "aws_autoscaling_group" "web_tier" {
     id      = aws_launch_template.web_tier.id
     version = "$Latest"
   }
-
+  lifecycle {
+    ignore_changes = [load_balancers, target_group_arns]
+  }
   tag {
     key                 = "Name"
     value               = "Web_Tier"
@@ -33,6 +35,10 @@ resource "aws_autoscaling_group" "app_tier" {
     version = "$Latest"
   }
 
+  lifecycle {
+    ignore_changes = [load_balancers, target_group_arns]
+  }
+  
   tag {
     key                 = "Name"
     value               = "App_Tier"

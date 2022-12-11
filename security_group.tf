@@ -14,9 +14,9 @@ resource "aws_security_group" "web_tier" {
   }
 
   ingress {
-    description     = "HTTP from anywhere port 3000"
-    from_port       = 3000
-    to_port         = 3000
+    description     = "HTTP from anywhere port 443"
+    from_port       = 443
+    to_port         = 443
     protocol        = "tcp"
     security_groups = [aws_security_group.alb_web_tier.id]
   }
@@ -44,16 +44,14 @@ resource "aws_security_group" "alb_web_tier" {
     to_port          = 80
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
   }
 
   ingress {
-    description      = "HTTP from anywhere port 3000"
-    from_port        = 3000
-    to_port          = 3000
+    description      = "HTTP from anywhere port 443"
+    from_port        = 443
+    to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
   }
 
   egress {
@@ -83,9 +81,9 @@ resource "aws_security_group" "app_tier" {
   }
 
   ingress {
-    description     = "HTTP from public subnet port 3000"
-    from_port       = 3000
-    to_port         = 3000
+    description     = "HTTP from public subnet port 443"
+    from_port       = 443
+    to_port         = 443
     protocol        = "tcp"
     security_groups = [aws_security_group.alb_app_tier.id]
   }
@@ -95,7 +93,6 @@ resource "aws_security_group" "app_tier" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
   }
 
   tags = {
@@ -117,9 +114,9 @@ resource "aws_security_group" "alb_app_tier" {
   }
 
   ingress {
-    description     = "HTTP from web tier port 3000"
-    from_port       = 3000
-    to_port         = 3000
+    description     = "HTTP from web tier port 443"
+    from_port       = 443
+    to_port         = 443
     protocol        = "tcp"
     security_groups = [aws_security_group.web_tier.id]
   }

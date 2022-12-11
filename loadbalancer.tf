@@ -1,6 +1,6 @@
 ##### Web Tier Load Balancer #####
 resource "aws_lb" "web_tier" {
-  name               = "web_tier-lb"
+  name               = "web-tier-lb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_web_tier.id]
@@ -21,7 +21,7 @@ resource "aws_lb_listener" "web_tier" {
 }
 
 resource "aws_lb_target_group" "web_tier" {
-  name        = "web_tier-lb-tg"
+  name        = "web-tier-lb-tg"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.mainvpc.id
@@ -30,7 +30,7 @@ resource "aws_lb_target_group" "web_tier" {
 ##### App tier Load Balancer #####
 
 resource "aws_lb" "app_tier" {
-  name               = "app_tier-lb"
+  name               = "app-tier-lb"
   internal           = true
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_app_tier.id]
@@ -51,7 +51,7 @@ resource "aws_lb_listener" "app_tier" {
 }
 
 resource "aws_lb_target_group" "app_tier" {
-  name        = "app_tier-lb-tg"
+  name        = "app-tier-lb-tg"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.mainvpc.id
@@ -66,3 +66,4 @@ resource "aws_lb_target_group" "app_tier" {
     port                = 80  
   }
 }
+

@@ -50,8 +50,8 @@ resource "aws_db_instance" "rds" {
   instance_class         = var.instance_class
   multi_az               = var.multi_az
   db_name                = var.db_name
-  username               = data.aws_ssm_parameter.rds_db_username
-  password               = data.aws_ssm_parameter.rds_db_password
+  username               = data.aws_ssm_parameter.rds_db_username.value
+  password               = data.aws_ssm_parameter.rds_db_password.value
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.rds-sg.id]
 }
